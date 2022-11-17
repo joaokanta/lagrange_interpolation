@@ -10,7 +10,7 @@ struct point
     double y;
 };
 
-double interpolate(struct point data[], int xi, int size)
+double interpolate(struct point data[], float xi, int size)
 {
     double result = 0; // Initialize result
 
@@ -21,7 +21,7 @@ double interpolate(struct point data[], int xi, int size)
         for (int j=0; j < size; j++)
         {
             if (j!=i)
-                term = term * (xi - data[j].x) / (double)(data[i].x - data[j].x);
+                term = term * (xi - data[j].x) / (data[i].x - data[j].x);
         }
 
         // Add current term to result
@@ -45,6 +45,26 @@ int main()
     };
 
     // Using the interpolate function to obtain a data point
-    printf("Had Usain Bolt competed for the 100 meters in the 2011 olympics his time would be approximate to: %f", interpolate(f, 2011, 7));
+    printf("Had Usain Bolt competed for the 100 meters in the 2011 olympics his time would be approximate to: %f\n", interpolate(f, 2011, 7));
+
+  // creating another example of interpolation 1
+    struct point g[] = {
+            {1, 20},
+            {2, 40},
+            {3, 60},
+    };
+
+  // Using the interpolate function to obtain a data point from dataset g
+    printf("Second example of interpolation: %f\n", interpolate(g, 1.5, 3));
+
+  // creating another example of interpolation 2
+    struct point h[] = {
+            {15, 100},
+            {45, 1000},
+            {75, 10000},
+    };
+  // Using the interpolate function to obtain a data point from dataset g
+    printf("Third example of interpolation: %f\n", interpolate(h, 50, 3));
+  
     return 0;
 }
